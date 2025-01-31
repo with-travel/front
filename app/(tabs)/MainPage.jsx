@@ -25,12 +25,25 @@ export default function MainPage() {
 
       {/* Section 2: Shorts */}
       <Text style={styles.sectionTitle}>Shorts</Text>
-      <View style={styles.shortsContainer}>
+      <ScrollView
+        horizontal
+        style={styles.horizontalScrollView}
+        showsHorizontalScrollIndicator={false}
+      >
         <View style={styles.shortsItem}>
-          <Text style={styles.addIcon}>+</Text>
+          <Text style={styles.addIcon}>0</Text>
         </View>
-        <View style={styles.shortsItem}></View>
-      </View>
+        <View style={styles.shortsItem}>
+          <Text style={styles.addIcon}>1</Text>
+        </View>
+        <View style={styles.shortsItem}>
+          <Text style={styles.addIcon}>2</Text>
+        </View>
+        <View style={styles.shortsItem}>
+          <Text style={styles.addIcon}>3</Text>
+        </View>
+      </ScrollView>
+
 
       {/* Section 3: 최신 여행 정보 */}
       <View style={styles.sectionHeader}>
@@ -114,7 +127,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     justifyContent: "center",
-    marginBottom:5,
+    marginBottom: 5,
   },
   sectionTitle: {
     marginHorizontal: 16,
@@ -122,17 +135,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
   },
-  shortsContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginHorizontal: 16,
+  horizontalScrollView: {
     marginBottom: 16,
+    paddingHorizontal: 16,
   },
   shortsItem: {
     backgroundColor: "#e0e0e0",
     height: 100,
-    flex: 1,
-    marginHorizontal: 4,
+    width: 100, // 가로 길이
+    marginRight: 8, // 아이템 간 간격
     borderRadius: 8,
     justifyContent: "center",
     alignItems: "center",
