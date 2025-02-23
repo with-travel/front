@@ -9,20 +9,14 @@ export default function RootLayout() {
   return (
     <View
       style={[
-        styles.container,
-        {
-          paddingTop: statusBarHeight,
-          backgroundColor: "#ffffff",
-        },
+        styles.container
       ]}
     >
-      {/* StatusBar 설정 */}
       <ExpoStatusBar
         translucent
         backgroundColor="transparent"
         style="dark"
       />
-      {/* Slot 컴포넌트 */}
       <Slot />
     </View>
   );

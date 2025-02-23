@@ -1,71 +1,100 @@
 import React from "react";
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Link } from "expo-router";
-import { useFonts } from 'expo-font';
-import LogoSvg from "../assets/images/svg";
+import { LinearGradient } from "expo-linear-gradient";
+import { LoginSvg, KakaoSvg } from "../assets/images/svg";
+import { useFonts } from "expo-font";
 import { useRouter } from "expo-router";
 
 export default function LoginPage() {
   const [fontsLoaded] = useFonts({
-    Pretendard: require("../assets/fonts/Pretendard-Bold.ttf"),
+    PretendardBold: require("../assets/fonts/Pretendard-Bold.ttf"),
   });
 
   const router = useRouter();
 
   const handleNavigation = () => {
-    router.push("/MainPage");
+    router.push("/SignUpPage");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.logoText}>여행의 설렘을 함께</Text>
-      {/* Centered Image */}
-      <LogoSvg width="200" height="200" style={styles.logo} />
-      {/* Kakao Login Button */}
-      <TouchableOpacity style={styles.kakaoButton} onPress={handleNavigation}>
-        <Text style={styles.kakaoButtonText}>카카오톡으로 5초만에 시작하기</Text>
-      </TouchableOpacity>
+      <LinearGradient
+        colors={[
+          "rgba(215, 84, 45, 0.7)",
+          "rgba(221, 101, 40, 0.7)",
+          "rgba(226, 118, 35, 0.7)",
+          "rgba(237, 151, 24, 0.7)",
+          "rgba(191, 153, 44, 0.7)",
+          "rgba(145, 154, 63, 0.7)",
+          "rgba(53, 157, 102, 0.7)",
+          "rgba(42, 143, 143, 0.8)",
+          "rgba(31, 128, 184, 0.9)",
+        ]}
+        style={styles.gradientBackground}
+      />
+
+      <View style={styles.content}>
+        <LoginSvg style={styles.logo} />
+        <Text style={styles.mainText}>위트와 함께{"\n"}여행할 준비가 되셨나요?</Text>
+        <TouchableOpacity style={styles.kakaoButton} onPress={handleNavigation}>
+          <KakaoSvg style={styles.kakaoIcon} />
+          <Text style={styles.kakaoButtonText}>
+            <Text style={{ fontFamily: "PretendardBold"}}>
+              카카오톡
+            </Text>으로 시작하기
+          </Text>
+
+        </TouchableOpacity>
+      </View>
     </View>
   );
 }
 
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#ffffff",
-    padding: 20,
-    marginTop:70,
   },
-  logoText: {
-    fontSize: 28,
-    fontFamily: "Pretendard",
-    fontWeight:"bold",
+  gradientBackground: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  content: {
+    flex: 1,
+    justifyContent: "flex-end",
+    alignItems: "center",
+    paddingBottom: 50,
   },
   logo: {
-    marginTop:0,
-    marginBottom: 0,
+    position: "absolute",
+    top: "10%",
+    width: "120%",
+    height: "60%",
+  },
+  mainText: {
+    fontSize: 27,
+    fontWeight: "bold",
+    color: "#FFFFFF",
+    textAlign: "left",
+    top: "-15%",
+    width: "90%",
+    lineHeight: 30,
   },
   kakaoButton: {
-    marginTop:100,
-    backgroundColor: "#FEE500",
-    paddingVertical: 20,
-    paddingHorizontal: 20,
-    borderRadius: 10,
+    flexDirection: "row",
     alignItems: "center",
-    shadowColor: "#000",
-    shadowOpacity: 0.2,
-    shadowOffset: { width: 0, height: 2 },
-    shadowRadius: 4,
-    elevation: 3,
-    justifyContent:"center",
+    backgroundColor: "#FFD761",
+    paddingVertical: 15,
+    paddingHorizontal: 40,
+    borderRadius: 5,
+    width: "90%",
+  },
+  kakaoIcon: {
+    width: 24,
+    height: 24,
   },
   kakaoButtonText: {
-    color: "#3C1E1E",
+    fontFamily: "PretendardReg",
     fontSize: 17,
-    fontFamily:"Pretendard",
-    fontWeight: "bold",
-  },
+    color: "#000000",
+    marginLeft: "10%",
+  },  
 });
