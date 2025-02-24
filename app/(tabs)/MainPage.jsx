@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity,Platform,StatusBar } from "react-native";
+const statusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 
 export default function MainPage() {
   return (
@@ -73,6 +74,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
+    marginTop:statusBarHeight,
   },
   header: {
     flexDirection: "row",

@@ -1,5 +1,6 @@
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TextInput, TouchableOpacity,Platform,StatusBar } from "react-native";
+const statusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 
 export default function Community() {
   return (
@@ -64,7 +65,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#f5f5f5",
-    padding: 16,
+    padding: 16,    marginTop:statusBarHeight,
+
   },
   header: {
     flexDirection: "row",

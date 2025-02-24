@@ -1,5 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList,Platform,StatusBar } from 'react-native';
+const statusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 
 const Chatting = () => {
   const chatList = [
@@ -65,7 +66,8 @@ const Chatting = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fff',    marginTop:statusBarHeight,
+
   },
   header: {
     flexDirection: 'row',

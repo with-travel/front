@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Platform, BackHandler } from "react-native";
 import { useRouter } from "expo-router"
 import { ArrowSvg } from "../assets/images/svg";
-import { widthPercentage, heightPercentage, fontPercentage } from "./ResponsiveSize";
+import { widthPercentage, heightPercentage, fontPercentage } from "../assets/ResponsiveSize";
 
 
 export default function SignUpPage() {

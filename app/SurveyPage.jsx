@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import { useRouter } from "expo-router";
 
 const SurveyPage = () => {
     const [step, setStep] = useState(1);
     const [selectedOptions, setSelectedOptions] = useState({});
     const [selfIntro, setSelfIntro] = useState("");
- 
+
+    const router = useRouter();
+
     const questions = [
         {
             id: 1,
@@ -28,24 +31,24 @@ const SurveyPage = () => {
             options: ["맛집 탐방", "액티비티", "사진 찍기", "문화 체험", "휴식", "스포츠"],
         },
     ];
- 
+
     const handleSelectOption = (option) => {
         setSelectedOptions({ ...selectedOptions, [step]: option });
     };
- 
+
     const isNextEnabled = step <= questions.length ? selectedOptions[step] : selfIntro.trim() !== "";
- 
+
     const goToNextStep = () => {
         if (step <= questions.length) {
             setStep(step + 1);
         } else {
-            alert("설문 완료!");
+            router.push("/MainPage"); 
         }
     };
 
     return (
         <View style={styles.container}>
-            {step <= questions.length ? ( 
+            {step <= questions.length ? (
                 <View style={styles.surveyContainer}>
                     <Text style={styles.progressText}>질문 {step} / {questions.length}</Text>
                     <Text style={styles.questionText}>{questions[step - 1].question}</Text>
@@ -80,7 +83,7 @@ const SurveyPage = () => {
                         <Text style={styles.buttonText}>다음</Text>
                     </TouchableOpacity>
                 </View>
-            ) : ( 
+            ) : (
                 <View style={styles.surveyContainer}>
                     <Text style={styles.progressText}>마지막 단계</Text>
                     <Text style={styles.questionText}>자기소개서를 입력해주세요.</Text>
@@ -105,7 +108,7 @@ const SurveyPage = () => {
         </View>
     );
 };
- 
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,

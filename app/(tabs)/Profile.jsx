@@ -1,6 +1,7 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, Button, StyleSheet, ScrollView, TouchableOpacity,Platform,StatusBar } from 'react-native';
 import { useRouter } from 'expo-router';
+const statusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 
 const Profile = () => {
   const router = useRouter();
@@ -80,6 +81,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    marginTop:statusBarHeight,
   },
   profileHeader: {
     flexDirection: 'row',
