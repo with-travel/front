@@ -17,7 +17,7 @@ export default function LoginPage() {
     router.push("/SignUpPage");
   };
   const handleNavigation1 = () => {
-    router.push("/MainPage");
+    router.push("/SurveyPage");
   };
 
   return (
@@ -37,7 +37,7 @@ export default function LoginPage() {
         style={styles.gradientBackground}
       />
       <TouchableOpacity style={styles.mpbutton} onPress={handleNavigation1}>
-        <Text style={styles.kakaoButtonText}>to home</Text>
+        <Text style={styles.kakaoButtonText}>Shortcut</Text>
       </TouchableOpacity>
       <View style={styles.content}>
         <LoginSvg style={styles.logo} />
@@ -45,7 +45,9 @@ export default function LoginPage() {
         <TouchableOpacity style={styles.kakaoButton} onPress={handleNavigation}>
           <KakaoSvg style={styles.kakaoIcon} />
           <Text style={styles.kakaoButtonText}>
-            <Text style={{ fontFamily: "PretendardBold" }}>카카오톡</Text>으로 시작하기
+            {/*lineHeight 안쓰면 텍스트 "시작하기" 부분이 잘림 */}
+            <Text style={{ fontFamily: "PretendardBold",  }}includeFontPadding={false}>카카오톡</Text>
+            으로 시작하기
           </Text>
         </TouchableOpacity>
       </View>
@@ -57,7 +59,7 @@ const styles = StyleSheet.create({
   mpbutton: {
     position: "absolute",
     bottom: heightPercentage(10),
-    right: widthPercentage(60),
+    center: widthPercentage(50),
   },
   container: {
     flex: 1,
@@ -99,11 +101,13 @@ const styles = StyleSheet.create({
   kakaoIcon: {
     width: widthPercentage(24),
     height: heightPercentage(24),
+    justifyContent:"center",
   },
   kakaoButtonText: {
+    textAlign:"center",
     fontFamily: "PretendardReg",
     fontSize: fontPercentage(17),
     color: "#000000",
-    marginLeft: widthPercentage(10),
+    marginLeft: widthPercentage(9),
   },
 });
