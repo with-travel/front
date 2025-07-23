@@ -1,28 +1,58 @@
-import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity,Platform,StatusBar } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform, StatusBar } from "react-native";
+import { WitMainPageLogoSvg, ProfileLogoSvg, FolderImageBlueSvg, FolderImageOrangeSvg } from "../../assets/images/svg"; // svg
+import { heightPercentage, widthPercentage, fontPercentage } from "@/assets/ResponsiveSize";
+
 const statusBarHeight = Platform.OS === "android" ? StatusBar.currentHeight : 0;
 
 export default function MainPage() {
-  return (
-    <ScrollView style={styles.container}>
+  const [hasPlannedTrip, setHasPlannedTrip] = useState(false); return (
+    <ScrollView style={styles.container}
+      contentContainerStyle={{ paddingBottom: heightPercentage(100) }}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>위트</Text>
-        <TouchableOpacity style={styles.profileButton}>
-          <Text style={styles.profileIcon}>👤</Text>
-        </TouchableOpacity>
+        <WitMainPageLogoSvg style={styles.title} />
       </View>
 
-      {/* Section 1: 나와 딱 맞는 동행 찾기 */}
-      <TouchableOpacity style={styles.linkButton}>
-        <Text style={styles.linkText}>나와 딱 맞는 동행 찾기</Text>
-      </TouchableOpacity>
-      <View style={styles.fullCard}>
-        <Text style={styles.cardText}>폴더</Text>
-        <View style={styles.addIconContainer}>
-          <Text style={styles.addIcon}>+</Text>
-        </View>
+      {/* Section 1: 동행 찾기 / 예정된 동행 */}
+      <View
+        style={[
+          styles.scheduledTripBlock,
+          { backgroundColor: hasPlannedTrip ? "#147FB8" : "#ED9718" },
+        ]}
+      >
+        {hasPlannedTrip ? (
+          // 예정된 동행 카드
+          <View style={[styles.scheduledTripBlock, { backgroundColor: "#147FB8" }]}>
+            <Text style={styles.cardTitle}>예정된 동행</Text>
+            <Text style={styles.cardSubtitle}>2025년 2월 30일 ○○님과의 동행</Text>
+            <TouchableOpacity
+              style={styles.folderImageWrapper}
+              onPress={() => setHasPlannedTrip(false)}
+            >
+              <FolderImageBlueSvg style={styles.folderImage} />
+              <View style={styles.folderTextOverlay}>
+                <Text style={styles.cardDestinationText}>후쿠오카 여행</Text>
+                <Text style={styles.cardDDay}>D-123</Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          // 동행 찾기 카드
+          <View style={[styles.scheduledTripBlock, { backgroundColor: "#ED9718" }]}>
+            <Text style={styles.cardTitle}>나와 딱 맞는 동행 찾기</Text>
+            <Text style={styles.cardSubtitle}>여행 설문을 통해 동행을 추천해줄게요!</Text>
+            <TouchableOpacity
+              style={styles.folderImageWrapper}
+              onPress={() => setHasPlannedTrip(true)}
+            >
+              <FolderImageOrangeSvg style={styles.folderImage} />
+            </TouchableOpacity>
+          </View>
+        )}
       </View>
+
+
 
       {/* Section 2: Shorts */}
       <Text style={styles.sectionTitle}>Shorts</Text>
@@ -74,7 +104,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop:statusBarHeight,
+    marginTop: statusBarHeight,
   },
   header: {
     flexDirection: "row",
@@ -83,53 +113,68 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   title: {
-    fontSize: 24,
-    fontWeight: "bold",
+    width: widthPercentage(50),
+    height: heightPercentage(50),
   },
-  profileButton: {
-    backgroundColor: "#f5f5f5",
-    borderRadius: 20,
-    padding: 8,
-  },
-  profileIcon: {
-    fontSize: 20,
-  },
-  linkButton: {
-    marginHorizontal: 16,
-    marginVertical: 8,
-  },
-  linkText: {
-    fontSize: 16,
-  },
-  fullCard: {
-    backgroundColor: "#e0e0e0",
-    height: 150,
-    marginHorizontal: 16,
+
+  // {section 1}
+  scheduledTripBlock: {
+    height: heightPercentage(261),
     justifyContent: "center",
-    alignItems: "center",
-    borderRadius: 8,
-    marginVertical: 8,
+    alignContent: "center",
   },
-  cardText: {
-    fontSize: 16,
-    fontWeight: "bold",
+
+  cardTitle: {
+    textAlign: "left",
+    fontFamily: "PretendardBold",
+    fontSize: fontPercentage(20),
+    color: "#ffffff",
+    marginTop: heightPercentage(10),
+    marginLeft: widthPercentage(20),
+  },
+  cardSubtitle: {
+    textAlign: "left",
+    fontFamily: "PretendardBold",
+    fontSize: fontPercentage(15),
+    color: "#ffffff",
+    marginTop: heightPercentage(5),
+    marginLeft: widthPercentage(20),
+  },
+  cardDestinationText: {
+    textAlign: "left",
+    fontFamily: "PretendardBold",
+    fontSize: fontPercentage(15),
+    color: "#ffffff",
+    marginTop: heightPercentage(5),
+    marginLeft: widthPercentage(15),
+  },
+  cardDDay: {
+    textAlign: "left",
+    fontFamily: "PretendardReg",
+    fontSize: fontPercentage(48),
+    color: "#ffffff",
+    marginLeft: widthPercentage(9),
+  },
+  folderImageWrapper: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: heightPercentage(139),
+    width: widthPercentage(357),
+    marginTop: heightPercentage(15),
+    alignSelf: "center",
+  },
+  folderImage: {
+    height: "100%",
+    width: "100%",
+  },
+  folderTextOverlay: {
     position: "absolute",
-    top: 16,
-    right: 16,
-  },
-  addIconContainer: {
-    backgroundColor: "#ccc",
-    borderRadius: 20,
-    width: 40,
-    height: 40,
+    top: heightPercentage(20),
+    left: widthPercentage(10),
+    right: 0,
+    bottom: 0,
     justifyContent: "center",
-    alignItems: "center",
-  },
-  addIcon: {
-    fontSize: 24,
-    fontWeight: "bold",
-    justifyContent: "center",
-    marginBottom: 5,
+    alignItems: "left",
   },
   sectionTitle: {
     marginHorizontal: 16,
@@ -143,8 +188,8 @@ const styles = StyleSheet.create({
   },
   shortsItem: {
     backgroundColor: "#e0e0e0",
-    height: 100,
-    width: 100, // 가로 길이
+    height: heightPercentage(289),
+    width: widthPercentage(203), // 가로 길이
     marginRight: 8, // 아이템 간 간격
     borderRadius: 8,
     justifyContent: "center",

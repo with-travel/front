@@ -157,6 +157,7 @@ const styles = StyleSheet.create({
     },
     surveyContainer:{
         alignItems:"center",
+        paddingHorizontal: widthPercentage(16),
     },
     questionContainer: {
         width: "90%",

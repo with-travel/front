@@ -17,7 +17,7 @@ export default function LoginPage() {
     router.push("/SignUpPage");
   };
   const handleNavigation1 = () => {
-    router.push("/SurveyPage");
+    router.push("/MainPage");
   };
 
   return (
@@ -57,7 +57,6 @@ export default function LoginPage() {
 
 const styles = StyleSheet.create({
   mpbutton: {
-    position: "absolute",
     bottom: heightPercentage(10),
     center: widthPercentage(50),
   },

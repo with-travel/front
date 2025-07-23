@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet, StatusBar, Platform, BackHandler } from "react-native";
 import { useRouter } from "expo-router"
-import { ArrowSvg } from "../assets/images/svg";
+import { ArrowLeftSvg } from "../assets/images/svg";
 import { widthPercentage, heightPercentage, fontPercentage } from "../assets/ResponsiveSize";
 
 
@@ -67,7 +67,7 @@ export default function SignUpPage() {
             <View style={styles.header}>
                 <Text style={styles.title}>회원가입</Text>
                 <TouchableOpacity style={styles.backButton} onPress={goToPreviousStep}>
-                    <ArrowSvg style={styles.arrowIcon} />
+                    <ArrowLeftSvg style={styles.arrowIcon} />
                 </TouchableOpacity>
             </View>
             <View style={styles.progressContainer}>
